@@ -1,0 +1,8 @@
+---
+name: awslogs
+dependencies:
+files:
+- awscli-cwlogs-1.3.3.tar.gz
+- Python-2.7.10.tgz
+- setuptools-21.0.0.tar.gz
+- pip-8.1.1.tar.gz
