@@ -1,5 +1,19 @@
 #!/bin/sh
 # Version: 1.1.2-rpm
-echo -n $$ > /var/run/awslogs.pid
-[ -f /etc/awslogs/proxy.conf ] && . /etc/awslogs/proxy.conf
-exec /usr/bin/env -i HTTPS_PROXY=$HTTPS_PROXY HTTP_PROXY=$HTTP_PROXY NO_PROXY=$NO_PROXY AWS_CONFIG_FILE=/etc/awslogs/awscli.conf HOME=/root /bin/nice -n 4 /usr/bin/aws logs push --config-file /etc/awslogs/awslogs.conf --additional-configs-dir /etc/awslogs/config >> /var/log/awslogs.log 2>&1
+
+export AWS_ACCESS_KEY_ID="<%= p('awslogs.access_key') %>"
+export AWS_SECRET_ACCESS_KEY="<%= p('awslogs.secret_access_key') %>"
+
+mkdir -p /var/vcap/sys/log/awslogs
+[ -f /var/vcap/jobs/awslogs/etc/proxy.conf ] && . /var/vcap/jobs/awslogs/etc/proxy.conf
+exec /usr/bin/env -i \
+  HTTPS_PROXY=$HTTPS_PROXY \
+  HTTP_PROXY=$HTTP_PROXY \
+  NO_PROXY=$NO_PROXY \
+  AWS_CONFIG_FILE=/var/vcap/jobs/awslogs/etc/awscli.conf \
+  HOME=/root \
+  /bin/nice -n 4 /var/vcap/packages/aws-cli/aws logs push \
+  --config-file /var/vcap/jobs/awslogs/etc/awslogs.conf \
+  --additional-configs-dir /var/vcap/jobs/awslogs/etc/config >> /var/vcap/sys/log/awslogs/awslogs.log 2>&1
+
+

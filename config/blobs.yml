@@ -19,3 +19,7 @@ pip-8.1.1.tar.gz:
   object_id: 1d120f0b-fb10-4d69-890a-6fb7bf764497
   sha: 6c6076664a51ac14849696df65ace8d44e42dea7
   size: 1139175
+aws-cli/awscli-bundle.zip:
+  object_id: 769c24a0-b0b2-4e29-b0d9-90fcf7b03bd8
+  sha: 95b38729dcb07acb692283de7013823e8aa75a9b
+  size: 6879872

@@ -5,9 +5,25 @@ templates:
   awslogs.cron.erb: conf/awslogs.cron.erb
   awslogsd.sh.erb: bin/awslogsd.sh.erb
   awslogs.init.erb: conf/awslogs.init.erb
-  awslogs_log_rotate.cron.erb: conf/awslogs_log_rotate.cron.erb
   awslogs.logrotate.erb: bin/awslogs.logrotate.erb
   awslogs-nanny.sh.erb: bin/awslogs-nanny.sh.erb
   proxy.conf.erb: conf/proxy.conf.erb
+  bin/ctl: bin/ctl
+  bin/monit_debugger: bin/monit_debugger
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
 packages:
+- aws-cli
 - awslogs
+properties:
+  awslogs.access_key:
+    description: AWS Access Key
+  awslogs.secret_access_key:
+    description: AWS Secret Access Key
+  awslogs.http_proxy:
+    default: ""
+  awslogs.https_proxy:
+    default: ""
+  awslogs.no_proxy:
+    default: ""
