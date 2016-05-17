@@ -10,7 +10,6 @@ templates:
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 packages:
-- aws-cli
 - awslogs
 properties:
   awslogs.access_key:
