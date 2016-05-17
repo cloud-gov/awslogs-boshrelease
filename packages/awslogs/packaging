@@ -22,7 +22,7 @@ tar xzf Python-2.7.10.tgz
 tar xzf setuptools-21.0.0.tar.gz
 (
   set -e
-  cd setuptools-21.0.0.tar.gz
+  cd setuptools-21.0.0
   ${BOSH_INSTALL_TARGET}/bin/python2 setup.py install --prefix=${BOSH_INSTALL_TARGET}
 )
 
