@@ -36,6 +36,12 @@ tar xzf pip-8.1.1.tar.gz
 ${BOSH_INSTALL_TARGET}/bin/pip install six-1.10.0-py2.py3-none-any.whl
 ${BOSH_INSTALL_TARGET}/bin/pip install py-dateutil-2.2.tar.gz
 
+unzip aws-cli/awscli-bundle.zip
+
+export PATH=$PATH:/var/vcap/packages/python/bin
+
+./awscli-bundle/install -i $BOSH_INSTALL_TARGET
+
 tar xzf awscli-cwlogs-1.3.3.tar.gz
 (
   set -e

@@ -1,13 +1,9 @@
 ---
 name: awslogs
 templates:
-  awslogs.conf.erb: conf/awslogs.conf.erb
-  awslogs.cron.erb: conf/awslogs.cron.erb
-  awslogsd.sh.erb: bin/awslogsd.sh.erb
-  awslogs.init.erb: conf/awslogs.init.erb
-  awslogs.logrotate.erb: bin/awslogs.logrotate.erb
-  awslogs-nanny.sh.erb: bin/awslogs-nanny.sh.erb
-  proxy.conf.erb: conf/proxy.conf.erb
+  config/awslogs.conf.erb: config/awslogs.conf.erb
+  bin/awslogsd.sh.erb: bin/awslogsd.sh.erb
+  config/proxy.conf.erb: config/proxy.conf.erb
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
   data/properties.sh.erb: data/properties.sh
