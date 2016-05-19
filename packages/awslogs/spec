@@ -7,3 +7,10 @@ files:
 - Python-2.7.10.tgz
 - setuptools-21.0.0.tar.gz
 - pip-8.1.1.tar.gz
+- six-1.10.0-py2.py3-none-any.whl
+- py-dateutil-2.2.tar.gz
+- bzip2-1.0.6.tar.gz
+- openssl-1.0.2h.tar.gz
+- zlib-1.2.8.tar.gz
+- sqlite-autoconf-3130000.tar.gz
+- pysqlite-2.8.2.tar.gz

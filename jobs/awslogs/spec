@@ -1,9 +1,10 @@
 ---
 name: awslogs
 templates:
-  config/awslogs.conf.erb: config/awslogs.conf.erb
-  bin/awslogsd.sh.erb: bin/awslogsd.sh.erb
-  config/proxy.conf.erb: config/proxy.conf.erb
+  config/awslogs.conf.erb: config/awslogs.conf
+  config/awscli.conf.erb: config/awscli.conf
+  bin/awslogsd.sh.erb: bin/awslogsd.sh
+  config/proxy.conf.erb: config/proxy.conf
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
   data/properties.sh.erb: data/properties.sh
@@ -16,6 +17,8 @@ properties:
     description: AWS Access Key
   awslogs.secret_access_key:
     description: AWS Secret Access Key
+  awslogs.region:
+    description: AWS Region
   awslogs.http_proxy:
     default: ""
   awslogs.https_proxy:

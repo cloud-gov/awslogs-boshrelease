@@ -23,3 +23,31 @@ aws-cli/awscli-bundle.zip:
   object_id: 769c24a0-b0b2-4e29-b0d9-90fcf7b03bd8
   sha: 95b38729dcb07acb692283de7013823e8aa75a9b
   size: 6879872
+py-dateutil-2.2.tar.gz:
+  object_id: 610a765a-2e52-4f1e-9915-68fa94175b14
+  sha: bd6ea7fa97bf3c900d1147b979b74a53beced44f
+  size: 64276
+six-1.10.0-py2.py3-none-any.whl:
+  object_id: b4ae8715-2c5e-494f-8e32-e1ccb9520479
+  sha: 19df5f56abce3db94d5e0e079e54bf430fddbb02
+  size: 10341
+bzip2-1.0.6.tar.gz:
+  object_id: 069435e8-e0a5-4a6a-8923-002f4f5c7485
+  sha: 3f89f861209ce81a6bab1fd1998c0ef311712002
+  size: 782025
+openssl-1.0.2h.tar.gz:
+  object_id: a76a3ff9-3ac6-456d-b716-1afaf1f7d01b
+  sha: 577585f5f5d299c44dd3c993d3c0ac7a219e4949
+  size: 5274412
+zlib-1.2.8.tar.gz:
+  object_id: feaf4803-f9e0-400f-95c7-ff18098cb2b5
+  sha: a4d316c404ff54ca545ea71a27af7dbc29817088
+  size: 571091
+sqlite-autoconf-3130000.tar.gz:
+  object_id: c7404eae-ae71-43b4-b2c9-ad6f86d193c6
+  sha: f6f76e310389e3f510b23826f805850449ae8653
+  size: 2459805
+pysqlite-2.8.2.tar.gz:
+  object_id: 2b739c20-e0ba-484e-802e-2f7a7091ce78
+  sha: 8ea35e98920711c5f9e37649bc13cc28bfa64873
+  size: 79715

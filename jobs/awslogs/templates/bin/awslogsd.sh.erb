@@ -3,6 +3,7 @@
 
 export AWS_ACCESS_KEY_ID="<%= p('awslogs.access_key') %>"
 export AWS_SECRET_ACCESS_KEY="<%= p('awslogs.secret_access_key') %>"
+export LD_LIBRARY_PATH=/var/vcap/packages/awslogs/lib
 
 mkdir -p /var/vcap/sys/log/awslogs
 [ -f /var/vcap/jobs/awslogs/config/proxy.conf ] && . /var/vcap/jobs/awslogs/config/proxy.conf
@@ -12,8 +13,8 @@ exec /usr/bin/env -i \
   NO_PROXY=$NO_PROXY \
   AWS_CONFIG_FILE=/var/vcap/jobs/awslogs/config/awscli.conf \
   HOME=/root \
-  /bin/nice -n 4 /var/vcap/packages/awslogs/bin/aws logs push \
+  /usr/bin/nice -n 4 /var/vcap/packages/awslogs/bin/python2 /var/vcap/packages/awslogs/aws-cli/bin/aws logs push \
   --config-file /var/vcap/jobs/awslogs/config/awslogs.conf \
-  --additional-configs-dir /var/vcap/jobs/awslogs/config/config >> /var/vcap/sys/log/awslogs/awslogs.log 2>&1
+  --additional-configs-dir /var/vcap/jobs/awslogs/config/config >> /var/vcap/sys/log/awslogs/awslogsd.log 2>&1
 
 
