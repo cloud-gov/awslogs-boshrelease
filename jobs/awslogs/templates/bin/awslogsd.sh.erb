@@ -1,13 +1,13 @@
 #!/bin/sh
 # Version: 1.1.2-rpm
 
-export AWS_ACCESS_KEY_ID="<%= p('awslogs.access_key') %>"
-export AWS_SECRET_ACCESS_KEY="<%= p('awslogs.secret_access_key') %>"
-export LD_LIBRARY_PATH=/var/vcap/packages/awslogs/lib
 
 mkdir -p /var/vcap/sys/log/awslogs
 [ -f /var/vcap/jobs/awslogs/config/proxy.conf ] && . /var/vcap/jobs/awslogs/config/proxy.conf
 exec /usr/bin/env -i \
+  AWS_ACCESS_KEY_ID="<%= p('awslogs.access_key') %>" \
+  AWS_SECRET_ACCESS_KEY="<%= p('awslogs.secret_access_key') %>" \
+  LD_LIBRARY_PATH=/var/vcap/packages/awslogs/lib \
   HTTPS_PROXY=$HTTPS_PROXY \
   HTTP_PROXY=$HTTP_PROXY \
   NO_PROXY=$NO_PROXY \

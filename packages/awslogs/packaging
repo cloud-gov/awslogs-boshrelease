@@ -9,18 +9,11 @@ set -u # report the usage of uninitialized variables
 CPUS=$(grep -c ^processor /proc/cpuinfo)
 export PREFIX=${BOSH_INSTALL_TARGET}
 export PATH=$PREFIX/bin:$PATH
-export CFLAGS=""
-export CPPFLAGS=""
-export LDFLAGS=""
-export LIBRARY_PATH=""
-export PYTHONPATH=""
-
-export CPPFLAGS="-I${BOSH_INSTALL_TARGET}/include ${CPPFLAGS}"
-export LDFLAGS="-L${BOSH_INSTALL_TARGET}/lib ${LDFLAGS}"
-export LIBRARY_PATH="${BOSH_INSTALL_TARGET}/lib:${LIBRARY_PATH}"
-export CFLAGS="-fPIC ${CFLAGS}"
+export CPPFLAGS="-I${BOSH_INSTALL_TARGET}/include"
+export LDFLAGS="-L${BOSH_INSTALL_TARGET}/lib"
+export LIBRARY_PATH="${BOSH_INSTALL_TARGET}/lib"
 export LD_LIBRARY_PATH="${LIBRARY_PATH}"
-export CFLAGS="-fPIC ${CFLAGS}"
+export CFLAGS="-fPIC"
 
 
 tar xzf bzip2-1.0.6.tar.gz
@@ -72,7 +65,7 @@ tar xzf Python-2.7.10.tgz
 )
 
 mkdir -p ${BOSH_INSTALL_TARGET}/lib/python2.7/site-packages
-export PYTHONPATH="${BOSH_INSTALL_TARGET}/lib/python2.7/site-packages:${PYTHONPATH}"
+export PYTHONPATH="${BOSH_INSTALL_TARGET}/lib/python2.7/site-packages"
 
 tar xzf setuptools-21.0.0.tar.gz
 (
