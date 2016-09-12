@@ -117,6 +117,13 @@ state_file = /var/vcap/sys/log/awslogs/agent-state
 #  %c           Locale's appropriate date and time representation.                                      Tue Aug 16 21:30:00 1988 (en_US)
 # ----------------------------------------------------------------------------------------------------------------------
 
+[/var/log/audit/audit.log]
+datetime_format = %b %d %H:%M:%S
+file = /var/log/audit/audit.log
+buffer_duration = 5000
+log_stream_name = {instance_id}
+initial_position = start_of_file
+log_group_name = /var/log/audit/audit.log
 
 [/var/log/auth.log]
 datetime_format = %b %d %H:%M:%S
