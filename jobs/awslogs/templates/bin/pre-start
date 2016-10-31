@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo "[general]"
+echo "state_file = /var/vcap/sys/log/awslogs/agent-state"
+
+for SYSTEM_LOG in /var/log/audit/audit.log /var/log/auth.log /var/log/dpkg.log /var/log/messages /var/log/syslog
+do
+        echo ""
+        echo "[$SYSTEM_LOG]"
+        echo "datetime_format = %b %d %H:%M:%S"
+        echo "file = $SYSTEM_LOG"
+        echo "buffer_duration = 5000"
+        echo "log_stream_name = {instance_id}"
+        echo "initial_position = start_of_file"
+        echo "log_group_name = system"
+done
+
+for I in `find  /var/vcap/sys/log/ -mindepth 1 -type d`
+do
+        GROUP_NAME=`basename $I`
+        for J in `find $I -name "*.log"`
+        do
+                echo ""
+                echo "[$J]"
+                echo "datetime_format = %b %d %H:%M:%S"
+                echo "file = $J"
+                echo "buffer_duration = 5000"
+                echo "log_stream_name = {instance_id}"
+                echo "initial_position = start_of_file"
+                echo "log_group_name = $GROUP_NAME"
+        done
+done
+
+
