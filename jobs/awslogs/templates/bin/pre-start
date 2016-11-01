@@ -18,11 +18,10 @@ done
 for I in `find  /var/vcap/sys/log/ -mindepth 1 -type d`
 do
         GROUP_NAME=`basename $I`
-        for J in `find $I -name "*.log"`
+        for J in `find $I -type f `
         do
                 echo ""
                 echo "[$J]"
-                echo "datetime_format = %b %d %H:%M:%S"
                 echo "file = $J"
                 echo "buffer_duration = 5000"
                 echo "log_stream_name = {instance_id}"
