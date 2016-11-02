@@ -15,6 +15,6 @@ exec /usr/bin/env -i \
   HOME=/root \
   /usr/bin/nice -n 4 /var/vcap/packages/awslogs/bin/python2 /var/vcap/packages/awslogs/aws-cli/bin/aws logs push \
   --config-file /var/vcap/jobs/awslogs/config/awslogs.conf \
-  --additional-configs-dir /var/vcap/jobs/awslogs/config >> /var/vcap/sys/log/awslogs/awslogsd.log 2>&1
+  --additional-configs-dir /var/vcap/jobs/awslogs/config/config >> /var/vcap/sys/log/awslogs/awslogsd.log 2>&1
 
 
