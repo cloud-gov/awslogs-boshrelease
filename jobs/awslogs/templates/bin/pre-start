@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for I in `find  /var/vcap/sys/log/ -mindepth 1 -type d`
+for I in `find  /var/vcap/sys/log -mindepth 1 -type d`
 do
         GROUP_NAME=`basename $I`
         for J in `find $I -type f `
