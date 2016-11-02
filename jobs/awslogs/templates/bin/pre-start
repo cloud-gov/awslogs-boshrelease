@@ -1,0 +1,18 @@
+#!/bin/bash
+
+for I in `find  /var/vcap/sys/log -mindepth 1 -type d`
+do
+        GROUP_NAME=`basename $I`
+        for J in `find $I -type f `
+        do
+                echo ""
+                echo "[$J]"
+                echo "file = $J"
+                echo "buffer_duration = 5000"
+                echo "log_stream_name = {instance_id}"
+                echo "initial_position = start_of_file"
+                echo "log_group_name = $GROUP_NAME"
+        done
+done > /var/vcap/jobs/awslogs/config/all-vcap-logs.conf
+
+
