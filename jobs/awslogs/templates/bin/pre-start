@@ -13,6 +13,4 @@ do
                 echo "initial_position = start_of_file"
                 echo "log_group_name = $GROUP_NAME"
         done
-done > /var/vcap/jobs/awslogs/config/all-vcap-logs.conf
-
-
+done > /var/vcap/jobs/awslogs/config/config/all-vcap-logs.conf
