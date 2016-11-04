@@ -3,7 +3,6 @@ name: awslogs
 templates:
   config/awslogs.conf.erb: config/awslogs.conf
   config/awscli.conf.erb: config/awscli.conf
-  config/config/README: config/config/README
   bin/awslogsd.sh.erb: bin/awslogsd.sh
   config/proxy.conf.erb: config/proxy.conf
   bin/ctl: bin/ctl
