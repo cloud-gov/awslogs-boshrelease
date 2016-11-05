@@ -1,7 +1,6 @@
 #!/bin/sh
 # Version: 1.1.2-rpm
 
-
 mkdir -p /var/vcap/sys/log/awslogs
 [ -f /var/vcap/jobs/awslogs/config/proxy.conf ] && . /var/vcap/jobs/awslogs/config/proxy.conf
 exec /usr/bin/env -i \
@@ -16,5 +15,3 @@ exec /usr/bin/env -i \
   /usr/bin/nice -n 4 /var/vcap/packages/awslogs/bin/python2 /var/vcap/packages/awslogs/aws-cli/bin/aws logs push \
   --config-file /var/vcap/jobs/awslogs/config/awslogs.conf \
   --additional-configs-dir /var/vcap/jobs/awslogs/conf.d >> /var/vcap/sys/log/awslogs/awslogsd.log 2>&1
-
-
