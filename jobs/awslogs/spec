@@ -7,7 +7,8 @@ templates:
   config/proxy.conf.erb: config/proxy.conf
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
-  bin/pre-start: bin/pre-start
+  bin/additional-logs.sh: bin/additional-logs.sh
+  config/awslogs.cron: config/awslogs
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh

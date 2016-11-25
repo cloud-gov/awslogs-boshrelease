@@ -17,6 +17,9 @@ case $1 in
     # store pid in $PIDFILE
     echo $$ > $PIDFILE
 
+    cp /var/vcap/jobs/awslogs/config/awslogs /etc/cron.d/
+    touch /etc/crontab # touch to help ensure cron reloads
+
     exec chpst -u root:root /var/vcap/jobs/awslogs/bin/awslogsd.sh \
          >>$LOG_DIR/$JOB_NAME.log 2>&1
 
