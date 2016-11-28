@@ -17,3 +17,4 @@ do
   echo "initial_position = start_of_file"
   echo "log_group_name = $GROUP_NAME"
 done > /var/vcap/jobs/awslogs/conf.d/all-vcap-logs.conf
+monit restart awslogs
