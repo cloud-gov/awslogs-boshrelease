@@ -1,1 +1,5 @@
---- {}
+---
+inotify-tools-3.14.tar.gz:
+  object_id: fc7d1ac5-07be-4884-bf22-a50cd9db7b16
+  sha: 0f17a329253a55525175b613cf454a4661f7e732
+  size: 66905

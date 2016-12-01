@@ -1,19 +1,20 @@
 ---
 name: awslogs
 templates:
-  config/awslogs.conf.erb: config/awslogs.conf
-  config/awscli.conf.erb: config/awscli.conf
   bin/awslogsd.sh.erb: bin/awslogsd.sh
-  config/proxy.conf.erb: config/proxy.conf
+  bin/awslogs-scanner.sh: bin/awslogs-scanner.sh
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
-  bin/additional-logs.sh: bin/additional-logs.sh
-  config/awslogs.cron: config/awslogs
+  bin/scanner-ctl: bin/scanner-ctl
+  config/awslogs.conf.erb: config/awslogs.conf
+  config/awscli.conf.erb: config/awscli.conf
+  config/proxy.conf.erb: config/proxy.conf
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 packages:
 - awslogs
+- inotify-tools
 properties:
   awslogs.access_key:
     description: AWS Access Key
