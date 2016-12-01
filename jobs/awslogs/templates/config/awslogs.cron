@@ -1,2 +1,0 @@
-# m h dom mon dow user  command
-0,15,30,45 * * * * root /var/vcap/jobs/awslogs/bin/additional-logs.sh

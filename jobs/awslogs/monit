@@ -3,3 +3,9 @@ check process awslogs
   start program "/var/vcap/jobs/awslogs/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs/bin/ctl start'"
   stop program "/var/vcap/jobs/awslogs/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs/bin/ctl stop'"
   group vcap
+
+check process awslogs-scanner
+  with pidfile /var/vcap/sys/run/awslogs/awslogs-scanner.pid
+  start program "/var/vcap/jobs/awslogs/bin/monit_debugger awslogs_scanner_ctl '/var/vcap/jobs/awslogs/bin/scanner-ctl start'"
+  stop program "/var/vcap/jobs/awslogs/bin/monit_debugger awslogs_scanner_ctl '/var/vcap/jobs/awslogs/bin/scanner-ctl stop'"
+  group vcap

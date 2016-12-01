@@ -1,0 +1,5 @@
+---
+name: inotify-tools
+dependencies: []
+files:
+- inotify-tools-3.14.tar.gz # From https://github.com/rvoicilas/inotify-tools/releases
