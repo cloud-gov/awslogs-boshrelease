@@ -1,94 +1,51 @@
-set -e # exit immediately if a simple command exits with a non-zero status
-set -u # report the usage of uninitialized variables
+set -eux
 
-# Available variables
-# $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
-# $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
+# download the installer, and reconfigure to install where bosh expects
+curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py | sed -e "s|\(AWSLOGS_HOME =\).*|\1 \"${BOSH_INSTALL_TARGET}\"|" > awslogs-agent-setup.py
 
-# Detect # of CPUs so make jobs can be parallelized
-CPUS=$(grep -c ^processor /proc/cpuinfo)
-export PREFIX=${BOSH_INSTALL_TARGET}
-export PATH=$PREFIX/bin:$PATH
-export CPPFLAGS="-I${BOSH_INSTALL_TARGET}/include"
-export LDFLAGS="-L${BOSH_INSTALL_TARGET}/lib"
-export LIBRARY_PATH="${BOSH_INSTALL_TARGET}/lib"
-export LD_LIBRARY_PATH="${LIBRARY_PATH}"
-export CFLAGS="-fPIC"
+chmod 755 awslogs-agent-setup.py
 
+# On debian based systems, the agent determines how to install by looking at /etc/issue
+# except hardening may have overwritten that file to comply with AC-8
+# temporarily fix that while the installer is running, by copying the critical bit the installer expects to find from lsb-release
+cp /etc/issue /etc/issue.orig
 
-tar xzf bzip2-1.0.6.tar.gz
-(
-  set -e
-  cd bzip2-1.0.6
-  make -f Makefile-libbz2_so
-  make -j${CPUS}
-  make install PREFIX=${BOSH_INSTALL_TARGET}
-  cp -a *.so* ${BOSH_INSTALL_TARGET}/lib
-)
+cat /etc/lsb-release | grep ID | cut -d"=" -f2 > /etc/issue
 
-tar xzf zlib-1.2.8.tar.gz
-(
-  set -e
-  cd zlib-1.2.8
-  ./configure --prefix=${BOSH_INSTALL_TARGET}
-  make -j${CPUS}
-  make install
-)
+CONFIG_FILE=/var/vcap/jobs/awslogs/config/awslogs.conf
 
-tar xzf openssl-1.0.2h.tar.gz
-(
-  set -e
-  cd openssl-1.0.2h
-  ./config --prefix=${BOSH_INSTALL_TARGET} --openssldir=${BOSH_INSTALL_TARGET}/openssl shared zlib
-  make -j${CPUS}
-  make install
-)
+# the config file has to exist (but can be empty, lol!) or the installer will flip out
+mkdir -p $(dirname ${CONFIG_FILE})
+touch ${CONFIG_FILE}
 
-export CPPFLAGS="${CPPFLAGS} -I${BOSH_INSTALL_TARGET}/include/openssl"
+INSTALL_COMMAND="./awslogs-agent-setup.py -n -r $(ec2metadata --availability-zone | sed 's/.$//') -c ${CONFIG_FILE}"
 
-tar xzf sqlite-autoconf-3130000.tar.gz
-(
-  set -e
-  cd sqlite-autoconf-3130000
-  ./configure --prefix=${BOSH_INSTALL_TARGET}
-  make -j${CPUS}
-  make install
-)
+if ! ${INSTALL_COMMAND}; then
+  # the above may fail due to a bug in AWS's installer on hardened systems
+  # https://forums.aws.amazon.com/thread.jspa?threadID=232057
+  # work around this by manually making it's script executable, and then retying the installation
+  chmod 755 ${BOSH_INSTALL_TARGET}/bin/aws
+  ${INSTAL_COMMAND}
+fi
 
-tar xzf Python-2.7.10.tgz
-(
-  set -e
-  cd Python-2.7.10
-    ./configure --prefix=${BOSH_INSTALL_TARGET}
-  make -j${CPUS}
-  make install
-)
+# restore our issue to it's original state
+mv /etc/issue.orig /etc/issue
 
-mkdir -p ${BOSH_INSTALL_TARGET}/lib/python2.7/site-packages
-export PYTHONPATH="${BOSH_INSTALL_TARGET}/lib/python2.7/site-packages"
+# if the install works this file is created
+if [ ! -f /etc/init.d/awslogs ]; then
+  echo "awslogs failed to install!"
+  exit 99;
+fi
 
-tar xzf setuptools-21.0.0.tar.gz
-(
-  set -e
-  cd setuptools-21.0.0
-  ${BOSH_INSTALL_TARGET}/bin/python2 setup.py install --prefix=${BOSH_INSTALL_TARGET}
-)
+# kill the agent the installer tried to start
+/etc/init.d/awslogs stop
 
-tar xzf pip-8.1.1.tar.gz
-(
-  set -e
-  BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
+# remove it's garbage
+rm /etc/init.d/awslogs
+rm /etc/logrotate.d/awslogs
+rm /etc/cron.d/awslogs*
+rm awslogs-agent-setup.py
 
-  cd pip-8.1.1
-  ${BOSH_INSTALL_TARGET}/bin/python2 setup.py install --prefix=${BOSH_INSTALL_TARGET}
-)
-
-${BOSH_INSTALL_TARGET}/bin/pip install pysqlite-2.8.2.tar.gz
-${BOSH_INSTALL_TARGET}/bin/pip install six-1.10.0-py2.py3-none-any.whl
-${BOSH_INSTALL_TARGET}/bin/pip install py-dateutil-2.2.tar.gz
-${BOSH_INSTALL_TARGET}/bin/pip install awscli-cwlogs-1.3.3.tar.gz
-
-unzip aws-cli/awscli-bundle.zip
-./awscli-bundle/install -i $BOSH_INSTALL_TARGET/aws-cli
-
-
+# if needed we could pin a version here by reinstalling a different version from pypi
+# after the initial install handles all the dependencies
+# example: ${BOSH_INSTALL_TARGET}/bin/pip install "awslogs < 1.4.0"
