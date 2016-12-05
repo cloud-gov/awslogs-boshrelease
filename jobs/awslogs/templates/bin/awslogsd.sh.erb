@@ -1,17 +1,29 @@
 #!/bin/sh
-# Version: 1.1.2-rpm
+
+set -eux
 
 mkdir -p /var/vcap/sys/log/awslogs
 [ -f /var/vcap/jobs/awslogs/config/proxy.conf ] && . /var/vcap/jobs/awslogs/config/proxy.conf
-exec /usr/bin/env -i \
-  AWS_ACCESS_KEY_ID="<%= p('awslogs.access_key') %>" \
-  AWS_SECRET_ACCESS_KEY="<%= p('awslogs.secret_access_key') %>" \
-  LD_LIBRARY_PATH=/var/vcap/packages/awslogs/lib \
-  HTTPS_PROXY=$HTTPS_PROXY \
-  HTTP_PROXY=$HTTP_PROXY \
-  NO_PROXY=$NO_PROXY \
-  AWS_CONFIG_FILE=/var/vcap/jobs/awslogs/config/awscli.conf \
-  HOME=/root \
-  /usr/bin/nice -n 4 /var/vcap/packages/awslogs/bin/python2 /var/vcap/packages/awslogs/aws-cli/bin/aws logs push \
-  --config-file /var/vcap/jobs/awslogs/config/awslogs.conf \
-  --additional-configs-dir /var/vcap/jobs/awslogs/conf.d >> /var/vcap/sys/log/awslogs/awslogsd.log 2>&1
+
+export AWS_ACCESS_KEY_ID=<%= p('awslogs.access_key') %>
+export AWS_SECRET_ACCESS_KEY=<%= p('awslogs.secret_access_key') %>
+export AWS_DEFAULT_REGION=<%= p('awslogs.region') %>
+export LD_LIBRARY_PATH=/var/vcap/packages/awslogs/lib
+export HTTPS_PROXY=$HTTPS_PROXY
+export HTTP_PROXY=$HTTP_PROXY
+export NO_PROXY=$NO_PROXY
+export AWS_CONFIG_FILE=/var/vcap/jobs/awslogs/config/awscli.conf
+export HOME=/root
+
+AWSCLI=/var/vcap/packages/awslogs/bin/aws
+
+# make a sample request to test our credentials;  this will fail (and monit will notice) if the creds are bad
+# the name "canary" was chosen at random, it doesn't matter what it is, querying an unknown metric will still succeed
+
+${AWSCLI} cloudwatch list-metrics --metric-name canary
+
+# if we got to here then we are good to start the agent
+
+/usr/bin/nice -n 4 ${AWSCLI} logs push \
+--config-file /var/vcap/jobs/awslogs/config/awslogs.conf \
+--additional-configs-dir /var/vcap/jobs/awslogs/conf.d >> /var/vcap/sys/log/awslogs/awslogsd.log 2>&1
