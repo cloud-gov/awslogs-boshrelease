@@ -2,4 +2,7 @@
 name: inotify-tools
 dependencies: []
 files:
-- inotify-tools-3.14.tar.gz # From https://github.com/rvoicilas/inotify-tools/releases
+- inotify-tools-3.14.tar.gz # https://github.com/rvoicilas/inotify-tools/releases
+- autoconf-2.69.tar.gz # https://ftp.gnu.org/gnu/autoconf/
+- automake-1.15.tar.gz # https://ftp.gnu.org/gnu/automake/
+- libtool-2.4.6.tar.gz # https://ftp.gnu.org/gnu/libtool/
