@@ -1,17 +1,33 @@
 set -eux
 
-sudo apt-get install -y autotools-dev automake libtool
+BUILD_DIR=$(mktemp -d)
 
-mkdir -p build
+install_compile_time_dependency() {
+	WHAT=${1}*
 
-tar xzf inotify* -C build
+	tar xzf ${WHAT} -C ${BUILD_DIR}
+	TARGET=$(mktemp -d)
+	( cd ${BUILD_DIR}/${WHAT} && ./configure --prefix=${TARGET} && make install )
+	export PATH="${PATH}:${TARGET}/bin"
+}
 
-cd build/inotify*
+# inotify needs automake/libtool to compile
+# automake needs autoconf
+install_compile_time_dependency autoconf
+install_compile_time_dependency automake
+install_compile_time_dependency libtool
+
+
+# compile and install inotify-tools
+
+tar xzf inotify* -C ${BUILD_DIR}
+
+cd ${BUILD_DIR}/inotify*
+
+libtoolize
 
 ./autogen.sh
 
 ./configure --prefix=${BOSH_INSTALL_TARGET}
-
-make
 
 make install

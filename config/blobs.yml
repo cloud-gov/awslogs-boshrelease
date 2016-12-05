@@ -3,3 +3,15 @@ inotify-tools-3.14.tar.gz:
   object_id: fc7d1ac5-07be-4884-bf22-a50cd9db7b16
   sha: 0f17a329253a55525175b613cf454a4661f7e732
   size: 66905
+autoconf-2.69.tar.gz:
+  object_id: 365787ba-b9b1-44b7-9a6b-4b593e0aa5c0
+  sha: 562471cbcb0dd0fa42a76665acf0dbb68479b78a
+  size: 1927468
+automake-1.15.tar.gz:
+  object_id: e34baa0e-8007-4684-a93f-3acd7e74394e
+  sha: b5a840c7ec4321e78fdc9472e476263fa6614ca1
+  size: 2244206
+libtool-2.4.6.tar.gz:
+  object_id: cbd4d47b-82a2-4a2c-a067-c7c2757c3013
+  sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
+  size: 1806697
