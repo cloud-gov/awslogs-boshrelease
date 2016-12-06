@@ -24,6 +24,6 @@ ${AWSCLI} cloudwatch list-metrics --metric-name canary
 
 # if we got to here then we are good to start the agent
 
-/usr/bin/nice -n 4 ${AWSCLI} logs push \
+exec /usr/bin/nice -n 4 ${AWSCLI} logs push \
 --config-file /var/vcap/jobs/awslogs/config/awslogs.conf \
 --additional-configs-dir /var/vcap/jobs/awslogs/conf.d >> /var/vcap/sys/log/awslogs/awslogsd.log 2>&1
