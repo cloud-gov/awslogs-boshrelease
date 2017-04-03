@@ -5,8 +5,8 @@ set -eux
 mkdir -p /var/vcap/sys/log/awslogs
 [ -f /var/vcap/jobs/awslogs/config/proxy.conf ] && . /var/vcap/jobs/awslogs/config/proxy.conf
 
-export AWS_ACCESS_KEY_ID=<%= p('awslogs.access_key') %>
-export AWS_SECRET_ACCESS_KEY=<%= p('awslogs.secret_access_key') %>
+<% if_p('awslogs.access_key') do |key| %>export AWS_ACCESS_KEY_ID=<%= key %><% end %>
+<% if_p('awslogs.secret_access_key') do |key| %>export AWS_SECRET_ACCESS_KEY=<%= key %><% end %>
 export AWS_DEFAULT_REGION=<%= p('awslogs.region') %>
 export LD_LIBRARY_PATH=/var/vcap/packages/awslogs/lib
 export HTTPS_PROXY=$HTTPS_PROXY
