@@ -25,6 +25,9 @@ case $1 in
   stop)
     kill_and_wait $PIDFILE
 
+    # ensure all child process are really dead
+    pkill -f "aws logs push"
+
     ;;
   *)
     echo "Usage: awslogs_ctl {start|stop}"
