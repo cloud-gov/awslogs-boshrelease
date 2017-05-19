@@ -1,51 +1,23 @@
 set -eux
 
-# download the installer, and reconfigure to install where bosh expects
-curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py | sed -e "s|\(AWSLOGS_HOME =\).*|\1 \"${BOSH_INSTALL_TARGET}\"|" > awslogs-agent-setup.py
+# replicate what the AWS installer does to get virtualenv available
+apt-get install -y python-virtualenv
 
-chmod 755 awslogs-agent-setup.py
+# create the virutal env
+virtualenv ${BOSH_INSTALL_TARGET}
 
-# On debian based systems, the agent determines how to install by looking at /etc/issue
-# except hardening may have overwritten that file to comply with AC-8
-# temporarily fix that while the installer is running, by copying the critical bit the installer expects to find from lsb-release
-cp /etc/issue /etc/issue.orig
+# activate expects PS1 to exist so +u it briefly
+set +u
+source ${BOSH_INSTALL_TARGET}/bin/activate
+set -u
 
-cat /etc/lsb-release | grep ID | cut -d"=" -f2 > /etc/issue
+# awslogs now depends on this specific version :( of pyyaml and wants to build the C version by default
+# force the pure-python install instead
+pip install PyYAML==3.11 --global-option="--without-libyaml"
 
-CONFIG_FILE=/var/vcap/jobs/awslogs/config/awslogs.conf
+# install awscli and the cwlogs plugin
+pip install awscli-cwlogs
 
-# the config file has to exist (but can be empty, lol!) or the installer will flip out
-mkdir -p $(dirname ${CONFIG_FILE})
-touch ${CONFIG_FILE}
-
-INSTALL_COMMAND="./awslogs-agent-setup.py -n -r $(ec2metadata --availability-zone | sed 's/.$//') -c ${CONFIG_FILE}"
-
-if ! ${INSTALL_COMMAND}; then
-  # the above may fail due to a bug in AWS's installer on hardened systems
-  # https://forums.aws.amazon.com/thread.jspa?threadID=232057
-  # work around this by manually making it's script executable, and then retying the installation
-  chmod 755 ${BOSH_INSTALL_TARGET}/bin/aws
-  ${INSTAL_COMMAND}
-fi
-
-# restore our issue to it's original state
-mv /etc/issue.orig /etc/issue
-
-# if the install works this file is created
-if [ ! -f /etc/init.d/awslogs ]; then
-  echo "awslogs failed to install!"
-  exit 99;
-fi
-
-# kill the agent the installer tried to start
-/etc/init.d/awslogs stop
-
-# remove it's garbage
-rm /etc/init.d/awslogs
-rm /etc/logrotate.d/awslogs
-rm /etc/cron.d/awslogs*
-rm awslogs-agent-setup.py
-
-# if needed we could pin a version here by reinstalling a different version from pypi
-# after the initial install handles all the dependencies
-# example: ${BOSH_INSTALL_TARGET}/bin/pip install "awslogs < 1.4.0"
+# configure aws logs
+${BOSH_INSTALL_TARGET}/bin/aws configure set plugins.cwlogs cwlogs
+${BOSH_INSTALL_TARGET}/bin/aws configure set default.region $(ec2metadata --availability-zone | sed 's/.$//')
