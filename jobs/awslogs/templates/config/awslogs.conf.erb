@@ -36,6 +36,7 @@
 # Path to the CloudWatch Logs agent's state file. The agent uses this file to maintain
 # client side state across its executions.
 state_file = /var/vcap/sys/log/awslogs/agent-state
+logging_config_file = /var/vcap/jobs/awslogs/config/logging.conf
 
 ## Each log file is defined in its own section. The section name doesn't
 ## matter as long as its unique within this file.
@@ -118,7 +119,6 @@ state_file = /var/vcap/sys/log/awslogs/agent-state
 # ----------------------------------------------------------------------------------------------------------------------
 
 [/var/log/audit/audit.log]
-datetime_format = %b %d %H:%M:%S
 file = /var/log/audit/audit.log
 buffer_duration = 5000
 log_stream_name = {instance_id}
@@ -126,7 +126,6 @@ initial_position = start_of_file
 log_group_name = /var/log/audit/audit.log
 
 [/var/log/auth.log]
-datetime_format = %b %d %H:%M:%S
 file = /var/log/auth.log
 buffer_duration = 5000
 log_stream_name = {instance_id}
@@ -134,7 +133,6 @@ initial_position = start_of_file
 log_group_name = /var/log/auth.log
 
 [/var/log/dpkg.log]
-datetime_format = %b %d %H:%M:%S
 file = /var/log/dpkg.log
 buffer_duration = 5000
 log_stream_name = {instance_id}
@@ -142,7 +140,6 @@ initial_position = start_of_file
 log_group_name = /var/log/dpkg.log
 
 [/var/log/messages]
-datetime_format = %b %d %H:%M:%S
 file = /var/log/messages
 buffer_duration = 5000
 log_stream_name = {instance_id}
@@ -150,7 +147,6 @@ initial_position = start_of_file
 log_group_name = /var/log/messages
 
 [/var/log/syslog]
-datetime_format = %b %d %H:%M:%S
 file = /var/log/syslog
 buffer_duration = 5000
 log_stream_name = {instance_id}
