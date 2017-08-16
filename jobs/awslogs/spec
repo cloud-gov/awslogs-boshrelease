@@ -8,6 +8,7 @@ templates:
   bin/scanner-ctl: bin/scanner-ctl
   config/awslogs.conf.erb: config/awslogs.conf
   config/awscli.conf.erb: config/awscli.conf
+  config/logging.conf.erb: config/logging.conf
   config/proxy.conf.erb: config/proxy.conf
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
