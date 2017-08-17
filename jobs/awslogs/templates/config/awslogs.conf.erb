@@ -152,3 +152,11 @@ buffer_duration = 5000
 log_stream_name = {instance_id}
 initial_position = start_of_file
 log_group_name = /var/log/syslog
+
+[egress-tcp-connections]
+datetime_format = %b %d %H:%M:%S
+file = /var/log/tcp_connections.log
+buffer_duration = 5000
+log_stream_name = {instance_id}
+initial_position = start_of_file
+log_group_name = egress-tcp-connections
