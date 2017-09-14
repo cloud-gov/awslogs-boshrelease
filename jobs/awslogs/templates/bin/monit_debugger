@@ -10,4 +10,4 @@ mkdir -p /var/vcap/sys/log/monit
   $2 $3 $4 $5 $6 $7
   R=$?
   echo "MONIT-DEBUG exit code $R"
-} >/var/vcap/sys/log/monit/monit_debugger.$1.log 2>&1
+} >>/var/vcap/sys/log/monit/monit_debugger.$1.log 2>&1
