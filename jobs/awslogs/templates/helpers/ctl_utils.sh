@@ -115,7 +115,12 @@ wait_pidfile() {
 
     wait_pid $pid $try_kill $timeout $force
 
-    rm -f $pidfile
+    newpid=$(head -1 "$pidfile")
+    if [ "$pid" != "$newpid"]; then
+      echo "$pidfile has changed from $pid to $newpid while waiting to kill"
+    else
+      rm -f $pidfile
+    fi
   else
     echo "Pidfile $pidfile doesn't exist"
   fi
