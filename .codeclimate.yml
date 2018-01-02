@@ -1,3 +1,8 @@
+exclude_paths:
+- jobs/awslogs/templates/helpers/
+- jobs/awslogs/templates/bin/monit_debugger
+- jobs/awslogs/templates/bin/ctl
+- jobs/awslogs/templates/bin/scanner-ctl
 plugins:
   shellcheck:
     enabled: true
