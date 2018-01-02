@@ -13,13 +13,13 @@ fi
 scan_for_logs() {
   TMPCONF=$(mktemp)
 
-  for I in `find /var/vcap/sys/log -type f`
+ find /var/vcap/sys/log -type f | while read -r I
   do
     # deliberately excluding obviously non-ingestable files (only ASCII, text or empty files,
     # no timestamp-rotated files) to reduce log readers and thus forestall lost log lines
-    echo $I | egrep -q 'log.[0-9][0-9][0-9]+$' && continue
-    file $I | egrep -q 'ASCII|text|empty' || continue
-    GROUP_NAME=`dirname $I | xargs basename`
+    echo "$I" | grep -Eq 'log.[0-9][0-9][0-9]+$' && continue
+    file "$I" | grep -Eq 'ASCII|text|empty' || continue
+    GROUP_NAME=$(dirname "$I" | xargs basename)
     echo ""
     echo "[$I]"
     echo "file = $I"
@@ -27,17 +27,17 @@ scan_for_logs() {
     echo "log_stream_name = $I-{instance_id}"
     echo "initial_position = start_of_file"
     echo "log_group_name = $GROUP_NAME"
-  done > ${TMPCONF}
+  done > "${TMPCONF}"
 
-  if cmp -s ${TMPCONF} ${CONFIG_FILE}; then
+  if cmp -s "${TMPCONF}" "${CONFIG_FILE}"; then
     # files are the same we don't need to do anything but clean up our tempfile
-    rm ${TMPCONF}
+    rm "${TMPCONF}"
   else
     # files differ, install and restart
-    echo -e "[$(date)] Updating awslogs config:\n$(diff ${CONFIG_FILE} ${TMPCONF})"
+    echo -e "[$(date)] Updating awslogs config:\n$(diff "${CONFIG_FILE}" "${TMPCONF}")"
 
-    cp ${CONFIG_FILE} ${CONFIG_FILE}-previous
-    mv ${TMPCONF} ${CONFIG_FILE}
+    cp "${CONFIG_FILE}" "${CONFIG_FILE}-previous"
+    mv "${TMPCONF}" "${CONFIG_FILE}"
 
     /var/vcap/bosh/bin/monit restart awslogs
   fi
