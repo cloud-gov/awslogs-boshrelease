@@ -1,4 +1,4 @@
-# Cloud Foundry AWS logs BOSH release
+# Cloud Foundry AWS logs BOSH release [![Code Climate](https://codeclimate.com/github/18F/cg-awslogs-boshrelease/badges/gpa.svg)](https://codeclimate.com/github/18F/cg-awslogs-boshrelease)
 
 This BOSH release helps your Cloud Foundry deployment automatically ship audit logs to AWS CloudWatch Logs.
 
