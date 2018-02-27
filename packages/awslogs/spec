@@ -1,5 +1,4 @@
 ---
 name: awslogs
-dependencies:
-files:
-- .gitkeep
+dependencies: []
+files: []
