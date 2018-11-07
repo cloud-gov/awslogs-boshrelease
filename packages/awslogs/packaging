@@ -1,5 +1,7 @@
 set -eux
 
+export PATH=/var/vcap/packages/awslogs-python3/bin:$PATH
+
 # replicate what the AWS installer does to get virtualenv available
 apt-get install -y python-virtualenv
 
@@ -13,10 +15,10 @@ set -u
 
 # awslogs now depends on this specific version :( of pyyaml and wants to build the C version by default
 # force the pure-python install instead
-pip install PyYAML==3.11 --global-option="--without-libyaml"
+pip3 install PyYAML==3.11 --global-option="--without-libyaml"
 
 # install awscli and the cwlogs plugin
-pip install awscli-cwlogs
+pip3 install awscli-cwlogs
 
 # configure aws logs
 ${BOSH_INSTALL_TARGET}/bin/aws configure set plugins.cwlogs cwlogs
