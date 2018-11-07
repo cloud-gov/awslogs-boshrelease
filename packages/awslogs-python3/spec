@@ -1,0 +1,7 @@
+---
+name: awslogs-python3
+
+dependencies: []
+
+files:
+- python/Python-3.7.1.tgz
