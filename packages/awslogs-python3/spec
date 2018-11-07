@@ -4,4 +4,4 @@ name: awslogs-python3
 dependencies: []
 
 files:
-- python/Python-3.7.1.tgz
+- awslogs-python3/Python-3.7.1.tgz
