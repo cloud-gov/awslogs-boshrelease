@@ -15,3 +15,7 @@ libtool-2.4.6.tar.gz:
   object_id: cbd4d47b-82a2-4a2c-a067-c7c2757c3013
   sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
   size: 1806697
+Python-3.7.1.tgz:
+  object_id: a4fc72e6-e2bf-11e8-a039-a45e60eee9fd
+  sha: 6b5dd9793a62586f8ced5711145f459bd127e8b7
+  size: 22802018
