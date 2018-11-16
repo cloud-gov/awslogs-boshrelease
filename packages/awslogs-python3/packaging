@@ -4,7 +4,7 @@ set -e -x
 CPUS=`grep -c ^processor /proc/cpuinfo`
 
 echo "Extracting python..."
-tar xzvf awslogs-python3/Python-3.7.1.tgz
+tar xzvf Python-3.7.1.tgz
 
 echo "Building python..."
 pushd Python-3.7.1
