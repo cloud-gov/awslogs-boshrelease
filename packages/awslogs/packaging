@@ -2,12 +2,8 @@ set -eux
 
 export PATH=/var/vcap/packages/awslogs-python3/bin:$PATH
 
-# replicate what the AWS installer does to get virtualenv available
-apt-get update
-apt-get install -y python-virtualenv
-
 # create the virutal env
-virtualenv ${BOSH_INSTALL_TARGET}
+python3 -m venv ${BOSH_INSTALL_TARGET}
 
 # activate expects PS1 to exist so +u it briefly
 set +u
