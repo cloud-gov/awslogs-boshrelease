@@ -2,6 +2,19 @@ set -eux
 
 export PATH=/var/vcap/packages/awslogs-python3/bin:$PATH
 
+# replicate what the AWS installer does to get virtualenv available
+apt-get update
+apt-get install -y python-virtualenv \
+                   python3-virtualenv
+
+# create the virutal env
+virtualenv -p python3 ${BOSH_INSTALL_TARGET}
+
+# activate expects PS1 to exist so +u it briefly
+set +u
+source ${BOSH_INSTALL_TARGET}/bin/activate
+set -u
+
 # awslogs now depends on this specific version :( of pyyaml and wants to build the C version by default
 # force the pure-python install instead
 pip3 install PyYAML==3.11 --global-option="--without-libyaml"
