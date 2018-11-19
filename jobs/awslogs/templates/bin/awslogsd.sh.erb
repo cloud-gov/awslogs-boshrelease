@@ -1,9 +1,12 @@
 #!/bin/sh
-
-export PATH=/var/vcap/packages/awslogs-python3/bin:$PATH
-export PYTHONPATH=/var/vcap/packages/awslogs-python3/lib/python
-
 set -eux
+
+PYTHON_PACKAGE_PATH=awslogs-python3
+BOSH_PACKAGE_PATH=/var/vcap/packages
+PYTHON_BIN_PATH=${BOSH_PACKAGE_PATH}/${PYTHON_PACKAGE_PATH}/bin
+PYTHON_LIB_PATH=${BOSH_PACKAGE_PATH}/${PYTHON_PACKAGE_PATH}/lib/python
+export PYTHONPATH=${PYTHON_LIB_PATH}
+export PATH=${PYTHON_BIN_PATH}:$PATH
 
 mkdir -p /var/vcap/sys/log/awslogs
 [ -f /var/vcap/jobs/awslogs/config/proxy.conf ] && . /var/vcap/jobs/awslogs/config/proxy.conf
@@ -11,14 +14,14 @@ mkdir -p /var/vcap/sys/log/awslogs
 <% if_p('awslogs.access_key') do |key| %>export AWS_ACCESS_KEY_ID=<%= key %><% end %>
 <% if_p('awslogs.secret_access_key') do |key| %>export AWS_SECRET_ACCESS_KEY=<%= key %><% end %>
 export AWS_DEFAULT_REGION=<%= p('awslogs.region') %>
-export LD_LIBRARY_PATH=/var/vcap/packages/awslogs/lib
+export LD_LIBRARY_PATH=${BOSH_PACKAGE_PATH}/${PYTHON_PACKAGE_PATH}/lib
 export HTTPS_PROXY=$HTTPS_PROXY
 export HTTP_PROXY=$HTTP_PROXY
 export NO_PROXY=$NO_PROXY
 export AWS_CONFIG_FILE=/var/vcap/jobs/awslogs/config/awscli.conf
 export HOME=/root
 
-AWSCLI=/var/vcap/packages/awslogs/bin/aws
+AWSCLI=${PYTHON_BIN_PATH}/aws
 
 # make a sample request to test our credentials;  this will fail (and monit will notice) if the creds are bad
 # the name "canary" was chosen at random, it doesn't matter what it is, querying an unknown metric will still succeed
