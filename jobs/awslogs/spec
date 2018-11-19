@@ -15,6 +15,7 @@ templates:
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 packages:
 - awslogs
+- awslogs-python3
 - inotify-tools
 properties:
   awslogs.access_key:
