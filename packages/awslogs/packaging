@@ -6,9 +6,11 @@ PYTHON_BIN_PATH=${BOSH_PACKAGE_PATH}/${PYTHON_PACKAGE_PATH}/bin
 PYTHON_LIB_PATH=${BOSH_PACKAGE_PATH}/${PYTHON_PACKAGE_PATH}/lib/python
 export PYTHONPATH=${PYTHON_LIB_PATH}
 
+${PYTHON_BIN_PATH}/python3 -m venv ${BOSH_INSTALL_TARGET}/venv
+. ${BOSH_INSTALL_TARGET}/venv/bin/activate
 # install awscli and the cwlogs plugin
-${PYTHON_BIN_PATH}/pip3 install awscli-cwlogs
+pip3 install awscli-cwlogs
 
 # configure aws logs
-${PYTHON_BIN_PATH}/aws configure set plugins.cwlogs cwlogs
-${PYTHON_BIN_PATH}/aws configure set default.region $(ec2metadata --availability-zone | sed 's/.$//')
+aws configure set plugins.cwlogs cwlogs
+aws configure set default.region $(ec2metadata --availability-zone | sed 's/.$//')
