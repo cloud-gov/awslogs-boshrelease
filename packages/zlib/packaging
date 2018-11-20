@@ -8,7 +8,7 @@ ZLIB_VERSION=$(ls -r zlib-*.tar.gz | sed 's/.*\/zlib-\(.*\)\.tar\.gz$/\1/' | hea
 BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
 
 echo "Extracting zlib ${ZLIB_VERSION} ... "
-tar xzvf "zlib-${ZLIB_VERSION}.tar.gz"
+tar xzvf "${ZLIB_VERSION}"
 
 echo "Building zlib ... "
 pushd "zlib-${ZLIB_VERSION}"
