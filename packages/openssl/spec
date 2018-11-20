@@ -1,0 +1,8 @@
+---
+name: openssl
+
+dependencies:
+- zlib
+
+files:
+- openssl-1.0.2j.tar.gz # https://www.openssl.org/source/openssl-1.0.2j.tar.gz
