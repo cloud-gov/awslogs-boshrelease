@@ -4,11 +4,11 @@
 set -e -x
 
 # Grab the latest versions that are in the directory
-OPENSSL_VERSION=$(ls -r openssl-*.tar.gz | sed 's/.*\/openssl-\(.*\)\.tar\.gz$/\1/' | head -1)
+OPENSSL_VERSION=$(ls -r openssl-*.tar.gz | sed 's/openssl-\(.*\)\.tar\.gz$/\1/' | head -1)
 BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
 
 echo "Extracting openssl ${OPENSSL_VERSION} ... "
-tar xvf "${OPENSSL_VERSION}"
+tar xvf "openssl-${OPENSSL_VERSION}.tar.gz"
 
 echo "Building openssl ... "
 export CFLAGS="-fPIC ${CFLAGS}"
@@ -24,7 +24,7 @@ export LDFLAGS
 export LIBRARY_PATH
 
 echo "Building and installing openssl ... "
-pushd "${OPENSSL_VERSION}"
+pushd "openssl-${OPENSSL_VERSION}"
   ./config --prefix=${BOSH_INSTALL_TARGET} --openssldir=${BOSH_INSTALL_TARGET}/openssl shared zlib
   make
   make install
