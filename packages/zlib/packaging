@@ -11,7 +11,7 @@ echo "Extracting zlib ${ZLIB_VERSION} ... "
 tar xzvf "${ZLIB_VERSION}"
 
 echo "Building zlib ... "
-pushd "zlib-${ZLIB_VERSION}"
+pushd "${ZLIB_VERSION}"
   ./configure --prefix=${BOSH_INSTALL_TARGET}
   make
   make install

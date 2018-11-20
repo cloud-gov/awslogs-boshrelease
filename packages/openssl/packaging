@@ -24,7 +24,7 @@ export LDFLAGS
 export LIBRARY_PATH
 
 echo "Building and installing openssl ... "
-pushd "openssl-${OPENSSL_VERSION}"
+pushd "${OPENSSL_VERSION}"
   ./config --prefix=${BOSH_INSTALL_TARGET} --openssldir=${BOSH_INSTALL_TARGET}/openssl shared zlib
   make
   make install
