@@ -17,6 +17,8 @@ packages:
 - awslogs
 - awslogs-python3
 - inotify-tools
+- openssl
+- zlib
 properties:
   awslogs.access_key:
     description: AWS Access Key
