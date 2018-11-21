@@ -9,6 +9,7 @@ mkdir -p /var/vcap/sys/log/awslogs
 <% if_p('awslogs.access_key') do |key| %>export AWS_ACCESS_KEY_ID=<%= key %><% end %>
 <% if_p('awslogs.secret_access_key') do |key| %>export AWS_SECRET_ACCESS_KEY=<%= key %><% end %>
 export AWS_DEFAULT_REGION=<%= p('awslogs.region') %>
+export LD_LIBRARY_PATH=/var/vcap/packages/openssl/lib
 export HTTPS_PROXY=$HTTPS_PROXY
 export HTTP_PROXY=$HTTP_PROXY
 export NO_PROXY=$NO_PROXY
