@@ -1,10 +1,10 @@
 #!/bin/sh
 set -eux
 
-. /var/vcap/packages/awslogs/venv/bin/activate
+. /var/vcap/packages/awslogs-xenial/venv/bin/activate
 
-mkdir -p /var/vcap/sys/log/awslogs
-[ -f /var/vcap/jobs/awslogs/config/proxy.conf ] && . /var/vcap/jobs/awslogs/config/proxy.conf
+mkdir -p /var/vcap/sys/log/awslogs-xenial
+[ -f /var/vcap/jobs/awslogs-xenial/config/proxy.conf ] && . /var/vcap/jobs/awslogs-xenial/config/proxy.conf
 
 <% if_p('awslogs.access_key') do |key| %>export AWS_ACCESS_KEY_ID=<%= key %><% end %>
 <% if_p('awslogs.secret_access_key') do |key| %>export AWS_SECRET_ACCESS_KEY=<%= key %><% end %>
@@ -23,5 +23,5 @@ aws cloudwatch list-metrics --metric-name canary
 # if we got to here then we are good to start the agent
 
 exec /usr/bin/nice -n 4 aws logs push \
---config-file /var/vcap/jobs/awslogs/config/awslogs.conf \
---additional-configs-dir /var/vcap/jobs/awslogs/conf.d >> /var/vcap/sys/log/awslogs/awslogsd.log 2>&1
+--config-file /var/vcap/jobs/awslogs-xenial/config/awslogs.conf \
+--additional-configs-dir /var/vcap/jobs/awslogs-xenial/conf.d >> /var/vcap/sys/log/awslogs-xenial/awslogsd.log 2>&1

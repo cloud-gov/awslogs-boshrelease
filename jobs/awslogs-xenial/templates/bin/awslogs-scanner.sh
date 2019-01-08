@@ -2,9 +2,9 @@
 
 INOTIFY_WAIT="/var/vcap/packages/inotify-tools/bin/inotifywait"
 
-mkdir -p /var/vcap/jobs/awslogs/conf.d
+mkdir -p /var/vcap/jobs/awslogs-xenial/conf.d
 
-export CONFIG_FILE=/var/vcap/jobs/awslogs/conf.d/all-vcap-logs.conf
+export CONFIG_FILE=/var/vcap/jobs/awslogs-xenial/conf.d/all-vcap-logs.conf
 
 if [ ! -f ${CONFIG_FILE} ]; then
   touch ${CONFIG_FILE}
@@ -34,12 +34,12 @@ scan_for_logs() {
     rm "${TMPCONF}"
   else
     # files differ, install and restart
-    echo -e "[$(date)] Updating awslogs config:\n$(diff "${CONFIG_FILE}" "${TMPCONF}")"
+    echo -e "[$(date)] Updating awslogs-xenial config:\n$(diff "${CONFIG_FILE}" "${TMPCONF}")"
 
     cp "${CONFIG_FILE}" "${CONFIG_FILE}-previous"
     mv "${TMPCONF}" "${CONFIG_FILE}"
 
-    /var/vcap/bosh/bin/monit restart awslogs
+    /var/vcap/bosh/bin/monit restart awslogs-xenial
   fi
 }
 
@@ -47,7 +47,7 @@ scan_for_logs() {
 scan_for_logs
 
 # then any time a new file is created in /var/vcap/sys/logs (excluding our own dir) then rescan for new logs
-while ${INOTIFY_WAIT} -r -e create /var/vcap/sys/log @/var/vcap/sys/log/awslogs; do
+while ${INOTIFY_WAIT} -r -e create /var/vcap/sys/log @/var/vcap/sys/log/awslogs-xenial; do
   echo "inotify triggered, scanning for new logs"
   scan_for_logs
 done

@@ -1,5 +1,5 @@
 ---
-name: awslogs
+name: awslogs-xenial
 templates:
   bin/awslogsd.sh.erb: bin/awslogsd.sh
   bin/awslogs-scanner.sh: bin/awslogs-scanner.sh
@@ -14,7 +14,7 @@ templates:
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 packages:
-- awslogs
+- awslogs-xenial
 - awslogs-python3
 - inotify-tools
 properties:
