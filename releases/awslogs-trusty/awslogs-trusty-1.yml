@@ -1,0 +1,24 @@
+name: awslogs-trusty
+version: "1"
+commit_hash: 636907a
+uncommitted_changes: true
+jobs:
+- name: awslogs-trusty
+  version: 07e1a807cde8703e3a0232c92a43493be2b8c007
+  fingerprint: 07e1a807cde8703e3a0232c92a43493be2b8c007
+  sha1: 90c827470ee2fe247a5c88643c86fadce116c869
+packages:
+- name: awslogs-trusty
+  version: d99b886620dd43aaf5744d5ac477d020d5369d32
+  fingerprint: d99b886620dd43aaf5744d5ac477d020d5369d32
+  sha1: ff2e12a2187b7201f17797fca8572a8e88852215
+  dependencies: []
+- name: inotify-tools
+  version: 5cf93b23af8d701fe01bd92c06e02dfc232e16a1
+  fingerprint: 5cf93b23af8d701fe01bd92c06e02dfc232e16a1
+  sha1: 5374daeae44cf27f5be7535806137453ae25f56a
+  dependencies: []
+license:
+  version: fbb241bbe211a00eb6267be38deecb48f071554a
+  fingerprint: fbb241bbe211a00eb6267be38deecb48f071554a
+  sha1: 44c03e86c37ba34d3047ca301d0a5d6b30be0632
