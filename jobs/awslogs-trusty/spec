@@ -1,5 +1,5 @@
 ---
-name: awslogs
+name: awslogs-trusty
 templates:
   bin/awslogsd.sh.erb: bin/awslogsd.sh
   bin/awslogs-scanner.sh: bin/awslogs-scanner.sh
@@ -14,18 +14,18 @@ templates:
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 packages:
-- awslogs
+- awslogs-trusty
 - inotify-tools
 properties:
-  awslogs.access_key:
+  awslogs-trusty.access_key:
     description: AWS Access Key
-  awslogs.secret_access_key:
+  awslogs-trusty.secret_access_key:
     description: AWS Secret Access Key
-  awslogs.region:
+  awslogs-trusty.region:
     description: AWS Region
-  awslogs.http_proxy:
+  awslogs-trusty.http_proxy:
     default: ""
-  awslogs.https_proxy:
+  awslogs-trusty.https_proxy:
     default: ""
-  awslogs.no_proxy:
+  awslogs-trusty.no_proxy:
     default: ""

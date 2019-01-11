@@ -1,11 +1,11 @@
-check process awslogs
-  with pidfile /var/vcap/sys/run/awslogs/awslogs.pid
-  start program "/var/vcap/jobs/awslogs/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs/bin/ctl start'"
-  stop program "/var/vcap/jobs/awslogs/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs/bin/ctl stop'"
+check process awslogs-trusty
+  with pidfile /var/vcap/sys/run/awslogs-trusty/awslogs.pid
+  start program "/var/vcap/jobs/awslogs-trusty/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs-trusty/bin/ctl start'"
+  stop program "/var/vcap/jobs/awslogs-trusty/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs-trusty/bin/ctl stop'"
   group vcap
 
 check process awslogs-scanner
-  with pidfile /var/vcap/sys/run/awslogs/awslogs-scanner.pid
-  start program "/var/vcap/jobs/awslogs/bin/monit_debugger awslogs_scanner_ctl '/var/vcap/jobs/awslogs/bin/scanner-ctl start'"
-  stop program "/var/vcap/jobs/awslogs/bin/monit_debugger awslogs_scanner_ctl '/var/vcap/jobs/awslogs/bin/scanner-ctl stop'"
+  with pidfile /var/vcap/sys/run/awslogs-trusty/awslogs-scanner.pid
+  start program "/var/vcap/jobs/awslogs-trusty/bin/monit_debugger awslogs_scanner_ctl '/var/vcap/jobs/awslogs-trusty/bin/scanner-ctl start'"
+  stop program "/var/vcap/jobs/awslogs-trusty/bin/monit_debugger awslogs_scanner_ctl '/var/vcap/jobs/awslogs-trusty/bin/scanner-ctl stop'"
   group vcap
