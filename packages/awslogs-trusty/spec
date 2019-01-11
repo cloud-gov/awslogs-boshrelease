@@ -1,0 +1,5 @@
+---
+name: awslogs-trusty
+dependencies:
+files:
+- .gitkeep
