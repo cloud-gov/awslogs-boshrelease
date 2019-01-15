@@ -1,5 +1,5 @@
 check process awslogs-trusty
-  with pidfile /var/vcap/sys/run/awslogs-trusty/awslogs.pid
+  with pidfile /var/vcap/sys/run/awslogs-trusty/awslogs-trusty.pid
   start program "/var/vcap/jobs/awslogs-trusty/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs-trusty/bin/ctl start'"
   stop program "/var/vcap/jobs/awslogs-trusty/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs-trusty/bin/ctl stop'"
   group vcap
