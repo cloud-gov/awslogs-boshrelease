@@ -12,7 +12,7 @@ export AWS_DEFAULT_REGION=<%= p('awslogs.region') %>
 export HTTPS_PROXY=$HTTPS_PROXY
 export HTTP_PROXY=$HTTP_PROXY
 export NO_PROXY=$NO_PROXY
-export AWS_CONFIG_FILE=/var/vcap/jobs/awslogs/config/awscli.conf
+export AWS_CONFIG_FILE=/var/vcap/jobs/awslogs-xenial/config/awscli.conf
 export HOME=/root
 
 # make a sample request to test our credentials;  this will fail (and monit will notice) if the creds are bad
