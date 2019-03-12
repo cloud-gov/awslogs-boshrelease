@@ -1,5 +1,5 @@
 check process awslogs-xenial
-  with pidfile /var/vcap/sys/run/awslogs-xenial/awslogs.pid
+  with pidfile /var/vcap/sys/run/awslogs-xenial/awslogs-xenial.pid
   start program "/var/vcap/jobs/awslogs-xenial/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs-xenial/bin/ctl start'"
   stop program "/var/vcap/jobs/awslogs-xenial/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs-xenial/bin/ctl stop'"
   group vcap
