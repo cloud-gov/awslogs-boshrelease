@@ -18,15 +18,15 @@ packages:
 - awslogs-python3
 - inotify-tools
 properties:
-  awslogs.access_key:
+  awslogs-xenial.access_key:
     description: AWS Access Key
-  awslogs.secret_access_key:
+  awslogs-xenial.secret_access_key:
     description: AWS Secret Access Key
-  awslogs.region:
+  awslogs-xenial.region:
     description: AWS Region
-  awslogs.http_proxy:
+  awslogs-xenial.http_proxy:
     default: ""
-  awslogs.https_proxy:
+  awslogs-xenial.https_proxy:
     default: ""
-  awslogs.no_proxy:
+  awslogs-xenial.no_proxy:
     default: ""
