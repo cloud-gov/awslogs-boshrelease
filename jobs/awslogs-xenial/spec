@@ -18,6 +18,8 @@ packages:
 - awslogs-python3
 - inotify-tools
 properties:
+  awslogs-xenial.awslogs_files_config:
+    description: List of file configurations for the awslogs agent
   awslogs-xenial.access_key:
     description: AWS Access Key
   awslogs-xenial.secret_access_key:

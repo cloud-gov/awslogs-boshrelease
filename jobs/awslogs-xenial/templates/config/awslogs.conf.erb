@@ -118,30 +118,11 @@ logging_config_file = /var/vcap/jobs/awslogs-xenial/config/logging.conf
 #  %c           Locale's appropriate date and time representation.                                      Tue Aug 16 21:30:00 1988 (en_US)
 # ----------------------------------------------------------------------------------------------------------------------
 
-[/var/log/audit/audit.log]
-file = /var/log/audit/audit.log
-buffer_duration = 5000
-log_stream_name = {instance_id}
-initial_position = start_of_file
-log_group_name = /var/log/audit/audit.log
-
-[/var/log/auth.log]
-file = /var/log/auth.log
-buffer_duration = 5000
-log_stream_name = {instance_id}
-initial_position = start_of_file
-log_group_name = /var/log/auth.log
-
-[/var/log/dpkg.log]
-file = /var/log/dpkg.log
-buffer_duration = 5000
-log_stream_name = {instance_id}
-initial_position = start_of_file
-log_group_name = /var/log/dpkg.log
-
-[/var/log/syslog]
-file = /var/log/syslog
-buffer_duration = 5000
-log_stream_name = {instance_id}
-initial_position = start_of_file
-log_group_name = /var/log/syslog
+<% p('awslogs-xenial.awslogs_files_config').each do |awslogs_file_config| %>
+[<%= awslogs_file_config["name"] %>]
+file = <%= awslogs_file_config["file"] %>
+log_group_name = <%= awslogs_file_config["log_group_name"] %>
+log_stream_name = <%= awslogs_file_config["log_stream_name"] %>
+initial_position = <%= awslogs_file_config["initial_position"] %>
+datetime_format = <%= awslogs_file_config["datetime_format"] %>
+<% end %>
