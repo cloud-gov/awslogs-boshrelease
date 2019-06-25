@@ -4,8 +4,3 @@ check process awslogs-xenial
   stop program "/var/vcap/jobs/awslogs-xenial/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs-xenial/bin/ctl stop'"
   group vcap
 
-check process awslogs-scanner
-  with pidfile /var/vcap/sys/run/awslogs-xenial/awslogs-scanner.pid
-  start program "/var/vcap/jobs/awslogs-xenial/bin/monit_debugger awslogs_scanner_ctl '/var/vcap/jobs/awslogs-xenial/bin/scanner-ctl start'"
-  stop program "/var/vcap/jobs/awslogs-xenial/bin/monit_debugger awslogs_scanner_ctl '/var/vcap/jobs/awslogs-xenial/bin/scanner-ctl stop'"
-  group vcap
