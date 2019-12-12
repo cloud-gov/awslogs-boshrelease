@@ -20,10 +20,10 @@ apt-get install -y build-essential \
                    uuid-dev
 
 echo "Extracting python..."
-tar xzvf Python-3.7.1.tgz
+tar xzvf Python-3.7.5.tgz
 
 echo "Building python..."
-pushd Python-3.7.1
+pushd Python-3.7.5
   ./configure --prefix=${BOSH_INSTALL_TARGET}
   make -j${CPUS}
   make install
