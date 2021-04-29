@@ -5,4 +5,4 @@ blobstore:
     bucket_name: gds-paas-build-releases-blobs
     region: eu-west-1
     endpoint: https://s3-eu-west-1.amazonaws.com
-final_name: awslogs-xenial
+final_name: awslogs-bionic
