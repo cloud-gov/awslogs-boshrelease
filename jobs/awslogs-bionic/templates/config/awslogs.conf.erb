@@ -35,8 +35,8 @@
 [general]
 # Path to the CloudWatch Logs agent's state file. The agent uses this file to maintain
 # client side state across its executions.
-state_file = /var/vcap/sys/log/awslogs-xenial/agent-state
-logging_config_file = /var/vcap/jobs/awslogs-xenial/config/logging.conf
+state_file = /var/vcap/sys/log/awslogs-bionic/agent-state
+logging_config_file = /var/vcap/jobs/awslogs-bionic/config/logging.conf
 
 ## Each log file is defined in its own section. The section name doesn't
 ## matter as long as its unique within this file.
@@ -118,7 +118,7 @@ logging_config_file = /var/vcap/jobs/awslogs-xenial/config/logging.conf
 #  %c           Locale's appropriate date and time representation.                                      Tue Aug 16 21:30:00 1988 (en_US)
 # ----------------------------------------------------------------------------------------------------------------------
 
-<% p('awslogs-xenial.awslogs_files_config').each do |awslogs_file_config| %>
+<% p('awslogs-bionic.awslogs_files_config').each do |awslogs_file_config| %>
 [<%= awslogs_file_config["name"] %>]
 file = <%= awslogs_file_config["file"] %>
 log_group_name = <%= awslogs_file_config["log_group_name"] %>
