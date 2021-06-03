@@ -1,5 +1,5 @@
 ---
-name: awslogs-xenial
+name: awslogs-bionic
 templates:
   bin/awslogsd.sh.erb: bin/awslogsd.sh
   bin/awslogs-scanner.sh: bin/awslogs-scanner.sh
@@ -14,19 +14,21 @@ templates:
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 packages:
-- awslogs-xenial
+- awslogs-bionic
 - awslogs-python3
 - inotify-tools
 properties:
-  awslogs-xenial.access_key:
+  awslogs-bionic.awslogs_files_config:
+    description: List of file configurations for the awslogs agent
+  awslogs-bionic.access_key:
     description: AWS Access Key
-  awslogs-xenial.secret_access_key:
+  awslogs-bionic.secret_access_key:
     description: AWS Secret Access Key
-  awslogs-xenial.region:
+  awslogs-bionic.region:
     description: AWS Region
-  awslogs-xenial.http_proxy:
+  awslogs-bionic.http_proxy:
     default: ""
-  awslogs-xenial.https_proxy:
+  awslogs-bionic.https_proxy:
     default: ""
-  awslogs-xenial.no_proxy:
+  awslogs-bionic.no_proxy:
     default: ""

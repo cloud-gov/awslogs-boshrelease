@@ -1,5 +1,5 @@
 ---
-name: awslogs-xenial
+name: awslogs-bionic
 dependencies:
   - awslogs-python3
 files:
