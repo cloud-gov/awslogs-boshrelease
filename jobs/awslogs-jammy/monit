@@ -1,0 +1,6 @@
+check process awslogs-jammy
+  with pidfile /var/vcap/sys/run/awslogs-jammy/awslogs-jammy.pid
+  start program "/var/vcap/jobs/awslogs-jammy/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs-jammy/bin/ctl start'"
+  stop program "/var/vcap/jobs/awslogs-jammy/bin/monit_debugger awslogs_ctl '/var/vcap/jobs/awslogs-jammy/bin/ctl stop'"
+  group vcap
+

@@ -3,6 +3,10 @@ exclude_paths:
 - jobs/awslogs-bionic/templates/bin/monit_debugger
 - jobs/awslogs-bionic/templates/bin/ctl
 - jobs/awslogs-bionic/templates/bin/scanner-ctl
+- jobs/awslogs-jammy/templates/helpers/
+- jobs/awslogs-jammy/templates/bin/monit_debugger
+- jobs/awslogs-jammy/templates/bin/ctl
+- jobs/awslogs-jammy/templates/bin/scanner-ctl
 plugins:
   shellcheck:
     enabled: true

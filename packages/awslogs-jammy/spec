@@ -1,0 +1,6 @@
+---
+name: awslogs-jammy
+dependencies:
+  - awslogs-python3
+files:
+- .gitkeep
