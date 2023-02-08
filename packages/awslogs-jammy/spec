@@ -1,5 +1,5 @@
 ---
-name: awslogs-bionic
+name: awslogs-jammy
 dependencies:
   - awslogs-python3
 files:
