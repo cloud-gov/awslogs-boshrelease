@@ -1,5 +1,5 @@
 ---
-name: awslogs-bionic
+name: awslogs-jammy
 templates:
   bin/awslogsd.sh.erb: bin/awslogsd.sh
   bin/awslogs-scanner.sh: bin/awslogs-scanner.sh
@@ -14,21 +14,21 @@ templates:
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 packages:
-- awslogs-bionic
+- awslogs-jammy
 - awslogs-python3
 - inotify-tools
 properties:
-  awslogs-bionic.awslogs_files_config:
+  awslogs-jammy.awslogs_files_config:
     description: List of file configurations for the awslogs agent
-  awslogs-bionic.access_key:
+  awslogs-jammy.access_key:
     description: AWS Access Key
-  awslogs-bionic.secret_access_key:
+  awslogs-jammy.secret_access_key:
     description: AWS Secret Access Key
-  awslogs-bionic.region:
+  awslogs-jammy.region:
     description: AWS Region
-  awslogs-bionic.http_proxy:
+  awslogs-jammy.http_proxy:
     default: ""
-  awslogs-bionic.https_proxy:
+  awslogs-jammy.https_proxy:
     default: ""
-  awslogs-bionic.no_proxy:
+  awslogs-jammy.no_proxy:
     default: ""
