@@ -2,6 +2,10 @@
 
 This BOSH release helps your Cloud Foundry deployment automatically ship audit logs to AWS CloudWatch Logs.
 
+## Development
+
+Development for recent stem cells is on the `bionic` and `jammy` branches.
+
 ## Trusty vs. Xenial releases
 
 The development of this release has been forked using Git tags for Trusty
