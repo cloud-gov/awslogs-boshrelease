@@ -25,6 +25,9 @@ case $1 in
   stop)
     kill_and_wait $PIDFILE
 
+    # ensure all child process are really dead
+    pkill -f "inotify"
+
     ;;
   *)
     echo "Usage: scanner-ctl {start|stop}"
