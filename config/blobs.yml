@@ -2,6 +2,9 @@ Python-3.7.5.tgz:
   size: 23126230
   object_id: f6bcef2c-0432-4095-4940-d982d628007c
   sha: sha256:8ecc681ea0600bbfb366f2b173f727b205bb825d93d2f0b286bc4e58d37693da
+amazon-cloudwatch-agent.deb:
+  size: 39713054
+  sha: sha256:4cbd241a80a1e134bc505f8f5419bf42ec3c51de8dd622a020d88ad069af7be7
 autoconf-2.71.tar.gz:
   size: 2003781
   object_id: 1d7d2706-e76a-4b6c-7644-9be084030aba
