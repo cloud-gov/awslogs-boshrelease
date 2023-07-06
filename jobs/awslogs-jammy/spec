@@ -6,9 +6,8 @@ templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
   bin/scanner-ctl: bin/scanner-ctl
-  config/awslogs.conf.erb: config/awslogs.conf
+  config/cw-agent.json.erb: config/cw-agent.json
   config/awscli.conf.erb: config/awscli.conf
-  config/logging.conf.erb: config/logging.conf
   config/proxy.conf.erb: config/proxy.conf
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
@@ -32,3 +31,6 @@ properties:
     default: ""
   awslogs-jammy.no_proxy:
     default: ""
+  awslogs-jammy.retention-in-days:
+    description: Number of days to retain Cloudwatch logs
+    default: 1096 # 3 years

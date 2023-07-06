@@ -1,16 +1,6 @@
 set -eux
 
-PYTHON_PACKAGE_PATH=awslogs-python3
-BOSH_PACKAGE_PATH=/var/vcap/packages
-PYTHON_BIN_PATH=${BOSH_PACKAGE_PATH}/${PYTHON_PACKAGE_PATH}/bin
-PYTHON_LIB_PATH=${BOSH_PACKAGE_PATH}/${PYTHON_PACKAGE_PATH}/lib/python
-export PYTHONPATH=${PYTHON_LIB_PATH}
+dpkg -i -E ./amazon-cloudwatch-agent.deb
 
-${PYTHON_BIN_PATH}/python3 -m venv ${BOSH_INSTALL_TARGET}/venv
-. ${BOSH_INSTALL_TARGET}/venv/bin/activate
-# install awscli and the cwlogs plugin
-pip3 install awscli-cwlogs
-
-# configure aws logs
-aws configure set plugins.cwlogs cwlogs
+# configure aws
 aws configure set default.region $(ec2metadata --availability-zone | sed 's/.$//')
