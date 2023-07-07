@@ -18,7 +18,8 @@ packages:
 - inotify-tools
 properties:
   awslogs-jammy.awslogs_files_config:
-    description: List of file configurations for the awslogs agent
+    description: List of file configurations for the Cloudwatch logs agent
+    default: []
   awslogs-jammy.access_key:
     description: AWS Access Key
   awslogs-jammy.secret_access_key:
