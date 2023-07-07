@@ -14,7 +14,6 @@ templates:
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 packages:
 - awslogs-jammy
-- awslogs-python3
 - aws-cloudwatch-agent
 - inotify-tools
 properties:
