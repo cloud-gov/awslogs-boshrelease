@@ -1,6 +1,6 @@
-set -eux
+#! /bin/bash
 
-dpkg -i -E ./amazon-cloudwatch-agent.deb
+set -eux
 
 # configure aws
 aws configure set default.region $(ec2metadata --availability-zone | sed 's/.$//')

@@ -1,0 +1,7 @@
+#! /bin/bash
+
+set -eux
+
+mkdir -p "$BOSH_INSTALL_TARGET/bin"
+
+dpkg -x -E ./amazon-cloudwatch-agent.deb "$BOSH_INSTALL_TARGET/bin"

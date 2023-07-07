@@ -1,4 +1,5 @@
 #!/bin/sh
+
 set -eux
 
 mkdir -p /var/vcap/sys/log/awslogs-jammy
@@ -19,7 +20,7 @@ export HOME=/root
 aws cloudwatch list-metrics --metric-name canary
 
 # if we got to here then we are good to start the agent
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
+/var/vcap/packages/aws-cloudwatch-agent/bin/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
   -a fetch-config \
   -m ec2 \
   -s \

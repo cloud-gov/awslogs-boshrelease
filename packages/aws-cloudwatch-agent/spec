@@ -1,0 +1,5 @@
+---
+name: aws-cloudwatch-agent
+files:
+# https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/download-cloudwatch-agent-commandline.html
+- amazon-cloudwatch-agent.deb

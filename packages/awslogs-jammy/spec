@@ -1,8 +1,6 @@
 ---
 name: awslogs-jammy
 dependencies:
-  - awslogs-python3
+  - aws-cloudwatch-agent
 files:
 - .gitkeep
-# https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/download-cloudwatch-agent-commandline.html
-- amazon-cloudwatch-agent.deb

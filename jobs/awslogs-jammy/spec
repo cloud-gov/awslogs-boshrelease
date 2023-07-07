@@ -15,6 +15,7 @@ templates:
 packages:
 - awslogs-jammy
 - awslogs-python3
+- aws-cloudwatch-agent
 - inotify-tools
 properties:
   awslogs-jammy.awslogs_files_config:
@@ -33,4 +34,4 @@ properties:
     default: ""
   awslogs-jammy.retention-in-days:
     description: Number of days to retain Cloudwatch logs
-    default: 1096 # 3 years
+    default: 1827 # 5 years

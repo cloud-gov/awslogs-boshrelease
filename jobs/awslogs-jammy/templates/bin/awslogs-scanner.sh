@@ -2,32 +2,30 @@
 
 INOTIFY_WAIT="/var/vcap/packages/inotify-tools/bin/inotifywait"
 
-mkdir -p /var/vcap/jobs/awslogs-jammy/conf.d
+export CONFIG_FILE=/var/vcap/jobs/awlogs-jammy/config/cw-agent.json
 
-export CONFIG_FILE=/var/vcap/jobs/awslogs-jammy/conf.d/all-vcap-logs.conf
-
-if [ ! -f ${CONFIG_FILE} ]; then
-  touch ${CONFIG_FILE}
-fi
+export PATH=$PATH:/var/vcap/packages/jq-1.5/bin
 
 scan_for_logs() {
   TMPCONF=$(mktemp)
 
- find /var/vcap/sys/log -type f | while read -r I
+  find /var/vcap/sys/log -type f | while read -r I
   do
     # deliberately excluding obviously non-ingestable files (only ASCII, text or empty files,
     # no timestamp-rotated files) to reduce log readers and thus forestall lost log lines
     echo "$I" | grep -Eq 'log.[0-9][0-9][0-9]+$' && continue
     file "$I" | grep -Eq 'ASCII|text|empty' || continue
     GROUP_NAME=$(dirname "$I" | xargs basename)
-    echo ""
-    echo "[$I]"
-    echo "file = $I"
-    echo "buffer_duration = 5000"
-    echo "log_stream_name = $I-{instance_id}"
-    echo "initial_position = start_of_file"
-    echo "log_group_name = $GROUP_NAME"
-  done > "${TMPCONF}"
+
+    cat $CONFIG_FILE \
+      | jq --arg file_path "$I" --arg group_name "$GROUP_NAME" --arg retention_in_days "<%= p("awslogs-jammy.retention-in-days") %>" '.logs.logs_collected.files.collect_list += [{
+        "file_path": $file_path,
+        "log_group_name": $group_name,
+        "log_stream_name": "{instance_id}",
+        "retention_in_days": $retention_in_days,
+      }]' \
+      > "$TMPCONF"
+  done
 
   if cmp -s "${TMPCONF}" "${CONFIG_FILE}"; then
     # files are the same we don't need to do anything but clean up our tempfile
