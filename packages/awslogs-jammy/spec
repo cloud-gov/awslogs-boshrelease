@@ -1,6 +1,4 @@
 ---
 name: awslogs-jammy
-dependencies:
-  - aws-cloudwatch-agent
 files:
 - .gitkeep

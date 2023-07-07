@@ -4,7 +4,7 @@ INOTIFY_WAIT="/var/vcap/packages/inotify-tools/bin/inotifywait"
 
 export CONFIG_FILE=/var/vcap/jobs/awlogs-jammy/config/cw-agent.json
 
-export PATH=$PATH:/var/vcap/packages/jq-1.5/bin
+export PATH=$PATH:/var/vcap/packages/jq-1.6/bin
 
 scan_for_logs() {
   TMPCONF=$(mktemp)

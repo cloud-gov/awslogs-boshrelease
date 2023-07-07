@@ -16,6 +16,7 @@ packages:
 - awslogs-jammy
 - aws-cloudwatch-agent
 - inotify-tools
+- jq-1.6
 properties:
   awslogs-jammy.awslogs_files_config:
     description: List of file configurations for the Cloudwatch logs agent

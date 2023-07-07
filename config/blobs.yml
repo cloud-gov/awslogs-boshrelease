@@ -14,6 +14,10 @@ inotify-tools-3.20.11.0.tar.gz:
   size: 84827
   object_id: c947b12d-ab28-420d-5dcd-92c04cebe2ec
   sha: sha256:58a3cde89e4a5111a87ac16b56b06a8f885460fca0aea51b69c856ce30a37a14
+jq/jq-linux64-1.6:
+  size: 3953824
+  object_id: 48815aab-e722-49df-7605-f225b1c38761
+  sha: sha256:af986793a515d500ab2d35f8d2aecd656e764504b789b66d7e1a0b727a124c44
 libtool-2.4.6.tar.gz:
   size: 1806697
   object_id: 6ec785f9-1c35-4c28-5323-ae0ff1e2c878
